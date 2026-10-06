@@ -38,7 +38,7 @@ public:
             right++;
         }
 
-        // Last vertical gap
+        // Last vertical gap 
         maxV = max(maxV, (long long)w - verticalCuts.back());
 
 
