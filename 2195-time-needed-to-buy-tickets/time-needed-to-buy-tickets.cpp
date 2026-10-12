@@ -10,13 +10,13 @@ public:
         int time = 0;
 
         while (!q.empty()) {
-            auto person = q.front();
-            q.pop();
+            auto person = q.front();  // 0,2
+            q.pop(); // 0 pops 
 
-            person.second--;
-            time++;
+            person.second--; 
+            time++; 
             if (person.second > 0) {
-                q.push(person);
+                q.push(person); //1 
             } else if (person.first == k) {
                 return time;
             }
