@@ -1,8 +1,9 @@
 class MinStack {
-    private:
+  
+public:
+  
     stack<int>st;
     stack<int>minst;
-public:
     MinStack() {
     }
     
