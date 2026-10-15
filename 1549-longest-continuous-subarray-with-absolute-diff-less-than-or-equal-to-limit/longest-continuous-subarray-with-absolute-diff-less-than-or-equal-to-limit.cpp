@@ -1,39 +1,34 @@
 class Solution {
 public:
     int longestSubarray(vector<int>& nums, int limit) {
-        deque<int> maxDeque;
-        deque<int> minDeque;
-        int left = 0;
-        int longest = 0;
+       deque<int>maxdq;
+       deque<int>mindq;
+       int n=nums.size();
+       int i=0;
+       int longest=0;
+       for(int j=0;j<n;j++){
+         while(!maxdq.empty()&&nums[maxdq.back()]<nums[j]){
+            maxdq.pop_back();
+         }
+         maxdq.push_back(j);
 
-        for (int right = 0; right < nums.size(); right++) {
-            while (!maxDeque.empty() &&
-                   nums[maxDeque.back()] < nums[right]) {
-                maxDeque.pop_back();
+         while(!mindq.empty()&& nums[mindq.back()]>nums[j]){
+            mindq.pop_back();
+         }
+         mindq.push_back(j);
+
+         while(nums[maxdq.front()]-nums[mindq.front()]>limit){
+            if(maxdq.front()==i){
+                maxdq.pop_front();
             }
-            maxDeque.push_back(right);
-
-            while (!minDeque.empty() &&
-                   nums[minDeque.back()] > nums[right]) {
-                minDeque.pop_back();
+             if(mindq.front()==i){
+                mindq.pop_front();
             }
-            minDeque.push_back(right);
-
-            while (nums[maxDeque.front()] -
-                   nums[minDeque.front()] > limit) {
-                if (maxDeque.front() == left)
-                    maxDeque.pop_front();
-
-                if (minDeque.front() == left)
-                    minDeque.pop_front();
-
-                left++;
-            }
-
-            int length = right - left + 1;
-            longest = max(longest, length);
-        }
-
-        return longest;
+            i++;
+         }
+         int length=j-i+1;
+         longest=max(longest,length);
+       }
+       return longest;
     }
 };
